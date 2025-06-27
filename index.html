@@ -1,212 +1,233 @@
-import React from 'react';
-import { User, LineChart, CloudRain, Users, TrendingUp, Sprout, Handshake, MessageSquare, Building2, Stethoscope, Cog, Search, GitPullRequest, FileText, Users2, Trophy, Smile, ArrowDown, Star } from 'lucide-react';
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ウルサポ 価値創造サイクル</title>
+    <!-- Tailwind CSS を読み込み -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- React と ReactDOM を読み込み -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <!-- Babel を読み込み (JSXをブラウザで解釈するため) -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- lucide-react のスタンドアロン版を読み込み -->
+    <script src="https://unpkg.com/lucide-react@0.244.0/dist/lucide-react.js"></script>
+    <style>
+      /* カスタムアニメーション */
+      @keyframes spin-slow {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+      .animate-spin-slow {
+        animation: spin-slow 10s linear infinite;
+      }
+      body {
+        font-family: 'sans-serif';
+      }
+    </style>
+</head>
+<body class="bg-slate-900">
+    <div id="root"></div>
 
-// ヘッダーコンポーネント
-const InfographicHeader = () => (
-    <div className="text-center p-6 md:p-8 bg-slate-800 rounded-t-xl shadow-lg">
-        <h1 className="text-2xl md:text-4xl font-bold text-white leading-tight">
-            自分の人生に点数をつけたから、<br className="md:hidden" />企業の未来に貢献できる。
-        </h1>
-        <h2 className="text-base md:text-lg font-semibold text-cyan-300 mt-2 tracking-widest">
-            URUSAPO VALUE CREATION CYCLE
-        </h2>
-    </div>
-);
+    <script type="text/babel">
+        // lucide-react のアイコンをグローバルスコープから取得
+        const { User, LineChart, CloudRain, Users, TrendingUp, Handshake, MessageSquare, Building2, Stethoscope, Cog, Search, GitPullRequest, FileText, Users2, Trophy, Smile, ArrowDown, Star } = lucide;
 
-// ステップカードコンポーネント
-const StepCard = ({ icon, title, subtitle, description, score, color, children }) => (
-    <div className="bg-slate-800 p-6 rounded-lg shadow-md border-l-4" style={{ borderColor: color }}>
-        <div className="flex items-start space-x-4">
-            <div className="flex-shrink-0">{icon}</div>
-            <div className="flex-grow">
-                <h3 className="text-xl font-bold text-white">{title}</h3>
-                <p className="text-sm font-semibold" style={{ color }}>{subtitle}</p>
-                <div className="mt-2 text-slate-300 space-y-2">{children}</div>
+        // ヘッダーコンポーネント
+        const InfographicHeader = () => (
+            <div className="text-center p-6 md:p-8 bg-slate-800 rounded-t-xl shadow-lg">
+                <h1 className="text-2xl md:text-4xl font-bold text-white leading-tight">
+                    自分の人生に点数をつけたから、<br className="md:hidden" />企業の未来に貢献できる。
+                </h1>
+                <h2 className="text-base md:text-lg font-semibold text-cyan-300 mt-2 tracking-widest">
+                    URUSAPO VALUE CREATION CYCLE
+                </h2>
             </div>
-            {score && (
-                <div className="flex flex-col items-center justify-center ml-4">
-                    <span className="text-3xl font-bold" style={{ color }}>{score}</span>
-                    <span className="text-xs text-slate-400">点</span>
-                </div>
-            )}
-        </div>
-    </div>
-);
+        );
 
-// 中心的なアイデンティティコンポーネント
-const CoreIdentity = () => (
-    <div className="bg-gradient-to-br from-slate-700 to-slate-800 p-6 my-4 rounded-xl shadow-2xl border-2 border-cyan-400">
-        <div className="text-center mb-6">
-            <div className="inline-flex items-center justify-center bg-slate-800 p-4 rounded-full border-2 border-cyan-500">
-                 <Stethoscope className="w-10 h-10 text-cyan-300" />
-                 <Cog className="w-10 h-10 text-cyan-300 animate-spin-slow" />
-            </div>
-            <h3 className="text-2xl font-extrabold text-white mt-4">私たちは「採用のホームドクター」である</h3>
-        </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-            <div className="flex flex-col items-center p-3 bg-slate-800 rounded-lg">
-                <Search className="w-8 h-8 text-cyan-400 mb-2"/>
-                <p className="text-white font-semibold text-sm">深い理解</p>
-            </div>
-            <div className="flex flex-col items-center p-3 bg-slate-800 rounded-lg">
-                <GitPullRequest className="w-8 h-8 text-cyan-400 mb-2 transform -rotate-90"/>
-                <p className="text-white font-semibold text-sm">根本治療</p>
-            </div>
-            <div className="flex flex-col items-center p-3 bg-slate-800 rounded-lg">
-                <FileText className="w-8 h-8 text-cyan-400 mb-2"/>
-                <p className="text-white font-semibold text-sm">未来の処方箋</p>
-            </div>
-            <div className="flex flex-col items-center p-3 bg-slate-800 rounded-lg">
-                <Users2 className="w-8 h-8 text-cyan-400 mb-2"/>
-                <p className="text-white font-semibold text-sm">信頼の伴走</p>
-            </div>
-        </div>
-    </div>
-);
-
-
-// 矢印コンポーネント
-const DownArrow = () => (
-  <div className="flex justify-center my-4">
-    <ArrowDown className="w-8 h-8 text-slate-500 animate-bounce" />
-  </div>
-);
-
-// フッターコンポーネント
-const InfographicFooter = () => (
-    <div className="text-center p-6 bg-slate-800 rounded-b-xl shadow-lg mt-4">
-        <h3 className="text-lg md:text-xl font-bold text-amber-300">
-            点数の先にある“ありがとう”の連鎖を、社会へ。
-        </h3>
-        <p className="text-white font-bold text-2xl mt-2 tracking-wider">ウルサポ</p>
-    </div>
-);
-
-
-export default function App() {
-  return (
-    <div className="bg-slate-900 min-h-screen font-sans p-4 md:p-8">
-      <div className="max-w-4xl mx-auto">
-        
-        <InfographicHeader />
-
-        <div className="mt-4 space-y-4">
-          
-          {/* STEP 1 */}
-          <StepCard 
-            icon={<User className="w-10 h-10 text-red-400 bg-red-900/50 p-2 rounded-full"/>}
-            title="100点ではなかった「私」"
-            subtitle="The Origin"
-            score="75"
-            color="#f87171" // red-400
-          >
-            <div className="flex items-center space-x-3 text-sm">
-                <LineChart className="w-5 h-5 text-red-400"/><span>下降気味のライフライン</span>
-            </div>
-            <div className="flex items-center space-x-3 text-sm">
-                <CloudRain className="w-5 h-5 text-slate-400"/><span>未来への不安と孤独</span>
-            </div>
-             <p className="text-xs pt-2 text-slate-400">フリーランスとして道半ば。自身の人生を客観的に見つめることから始まった。</p>
-          </StepCard>
-          
-          <DownArrow />
-
-          {/* STEP 2 */}
-          <StepCard 
-            icon={<Users className="w-10 h-10 text-green-400 bg-green-900/50 p-2 rounded-full"/>}
-            title="ウルサポで「100点」へ近づく"
-            subtitle="The Turning Point"
-            score="95"
-            color="#4ade80" // green-400
-          >
-            <div className="flex items-center space-x-3 text-sm">
-                <TrendingUp className="w-5 h-5 text-green-400"/><span>上昇に転じる実感</span>
-            </div>
-            <div className="flex items-center space-x-3 text-sm">
-                <Handshake className="w-5 h-5 text-slate-400"/><span>仲間との共創と成長</span>
-            </div>
-            <p className="text-xs pt-2 text-slate-400">仲間との出会い、顧客からの感謝。活動そのものが、人生の点数を高める原体験となった。</p>
-          </StepCard>
-
-          <DownArrow />
-
-          {/* STEP 3 */}
-          <StepCard 
-            icon={<MessageSquare className="w-10 h-10 text-blue-400 bg-blue-900/50 p-2 rounded-full"/>}
-            title="今度は、私たちが「問いかける」"
-            subtitle="The Mission"
-            color="#60a5fa" // blue-400
-          >
-            <div className="flex items-center space-x-4">
-              <div className="flex-shrink-0 text-center">
-                  <User className="w-12 h-12 text-green-400 mx-auto"/>
-                  <p className="text-xs font-bold text-white mt-1">ウルサポ</p>
-              </div>
-              <div className="font-bold text-2xl text-slate-500">→</div>
-              <div className="flex-grow bg-slate-700 p-3 rounded-lg text-center">
-                  <p className="text-lg md:text-xl font-bold text-white">「いまの採用、何点ですか？」</p>
-              </div>
-              <div className="font-bold text-2xl text-slate-500">→</div>
-              <div className="flex-shrink-0 text-center">
-                  <Building2 className="w-12 h-12 text-slate-400 mx-auto"/>
-                  <p className="text-xs font-bold text-white mt-1">顧客企業</p>
-              </div>
-            </div>
-            <p className="text-xs pt-3 text-slate-400 text-center">自身の経験があるからこそ、本質的な問いかけで経営者の孤独に寄り添う。</p>
-            {/* === 追加されたセクション === */}
-            <div className="mt-4 pt-4 border-t border-slate-700 text-center">
-                <div className="flex items-center justify-center space-x-2">
-                    <Star className="w-6 h-6 text-amber-300" fill="#fbb_f24" />
-                    <p className="text-amber-300 font-bold text-lg md:text-xl">
-                        75点ではなく、中小企業様の120点を目指す
-                    </p>
-                    <Star className="w-6 h-6 text-amber-300" fill="#fbb_f24" />
+        // ステップカードコンポーネント
+        const StepCard = ({ icon, title, subtitle, score, color, children }) => (
+            <div className="bg-slate-800 p-6 rounded-lg shadow-md border-l-4" style={{ borderColor: color }}>
+                <div className="flex items-start space-x-4">
+                    <div className="flex-shrink-0">{icon}</div>
+                    <div className="flex-grow">
+                        <h3 className="text-xl font-bold text-white">{title}</h3>
+                        <p className="text-sm font-semibold" style={{ color }}>{subtitle}</p>
+                        <div className="mt-2 text-slate-300 space-y-2">{children}</div>
+                    </div>
+                    {score && (
+                        <div className="flex flex-col items-center justify-center ml-4">
+                            <span className="text-3xl font-bold" style={{ color }}>{score}</span>
+                            <span className="text-xs text-slate-400">点</span>
+                        </div>
+                    )}
                 </div>
             </div>
-             {/* === /追加されたセクション === */}
-          </StepCard>
-          
-          <DownArrow />
+        );
 
-          {/* STEP 4 - Core */}
-          <CoreIdentity />
-
-          <DownArrow />
-          
-          {/* STEP 5 */}
-          <StepCard 
-            icon={<Trophy className="w-10 h-10 text-amber-400 bg-amber-900/50 p-2 rounded-full"/>}
-            title="いただくのは「評価」でなく「感謝」"
-            subtitle="The Outcome"
-            color="#fbbf24" // amber-400
-          >
-            <div className="flex items-center space-x-3 text-sm">
-                <Smile className="w-5 h-5 text-amber-400"/><span>企業の変革と未来の点数UP</span>
+        // 中心的なアイデンティティコンポーネント
+        const CoreIdentity = () => (
+            <div className="bg-gradient-to-br from-slate-700 to-slate-800 p-6 my-4 rounded-xl shadow-2xl border-2 border-cyan-400">
+                <div className="text-center mb-6">
+                    <div className="inline-flex items-center justify-center bg-slate-800 p-4 rounded-full border-2 border-cyan-500">
+                         <Stethoscope className="w-10 h-10 text-cyan-300" />
+                         <Cog className="w-10 h-10 text-cyan-300 animate-spin-slow" />
+                    </div>
+                    <h3 className="text-2xl font-extrabold text-white mt-4">私たちは「採用のホームドクター」である</h3>
+                </div>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                    <div className="flex flex-col items-center p-3 bg-slate-800 rounded-lg">
+                        <Search className="w-8 h-8 text-cyan-400 mb-2"/>
+                        <p className="text-white font-semibold text-sm">深い理解</p>
+                    </div>
+                    <div className="flex flex-col items-center p-3 bg-slate-800 rounded-lg">
+                        <GitPullRequest className="w-8 h-8 text-cyan-400 mb-2 transform -rotate-90"/>
+                        <p className="text-white font-semibold text-sm">根本治療</p>
+                    </div>
+                    <div className="flex flex-col items-center p-3 bg-slate-800 rounded-lg">
+                        <FileText className="w-8 h-8 text-cyan-400 mb-2"/>
+                        <p className="text-white font-semibold text-sm">未来の処方箋</p>
+                    </div>
+                    <div className="flex flex-col items-center p-3 bg-slate-800 rounded-lg">
+                        <Users2 className="w-8 h-8 text-cyan-400 mb-2"/>
+                        <p className="text-white font-semibold text-sm">信頼の伴走</p>
+                    </div>
+                </div>
             </div>
-            <div className="flex items-center space-x-3 text-sm">
-                <Trophy className="w-5 h-5 text-slate-400"/><span>心からの「顧客満足度賞」</span>
+        );
+
+        // 矢印コンポーネント
+        const DownArrow = () => (
+          <div className="flex justify-center my-4">
+            <ArrowDown className="w-8 h-8 text-slate-500 animate-bounce" />
+          </div>
+        );
+
+        // フッターコンポーネント
+        const InfographicFooter = () => (
+            <div className="text-center p-6 bg-slate-800 rounded-b-xl shadow-lg mt-4">
+                <h3 className="text-lg md:text-xl font-bold text-amber-300">
+                    点数の先にある“ありがとう”の連鎖を、社会へ。
+                </h3>
+                <p className="text-white font-bold text-2xl mt-2 tracking-wider">ウルサポ</p>
             </div>
-            <p className="text-xs pt-2 text-slate-400">根本治療によって企業の体質は改善され、感謝の連鎖が生まれる。</p>
-          </StepCard>
+        );
 
-        </div>
+        function App() {
+          return (
+            <div className="min-h-screen p-4 md:p-8">
+              <div className="max-w-4xl mx-auto">
+                
+                <InfographicHeader />
 
-        <InfographicFooter />
-      </div>
-    </div>
-  );
-}
+                <div className="mt-4 space-y-4">
+                  
+                  {/* STEP 1 */}
+                  <StepCard 
+                    icon={<User className="w-10 h-10 text-red-400 bg-red-900/50 p-2 rounded-full"/>}
+                    title="100点ではなかった「私」"
+                    subtitle="The Origin"
+                    score="75"
+                    color="#f87171"
+                  >
+                    <div className="flex items-center space-x-3 text-sm">
+                        <LineChart className="w-5 h-5 text-red-400"/><span>下降気味のライフライン</span>
+                    </div>
+                    <div className="flex items-center space-x-3 text-sm">
+                        <CloudRain className="w-5 h-5 text-slate-400"/><span>未来への不安と孤独</span>
+                    </div>
+                     <p className="text-xs pt-2 text-slate-400">フリーランスとして道半ば。自身の人生を客観的に見つめることから始まった。</p>
+                  </StepCard>
+                  
+                  <DownArrow />
 
-// Add a custom animation for slow spinning
-const styleSheet = document.createElement("style");
-styleSheet.type = "text/css";
-styleSheet.innerText = `
-  @keyframes spin-slow {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
-  .animate-spin-slow {
-    animation: spin-slow 10s linear infinite;
-  }
-`;
-document.head.appendChild(styleSheet);
+                  {/* STEP 2 */}
+                  <StepCard 
+                    icon={<Users className="w-10 h-10 text-green-400 bg-green-900/50 p-2 rounded-full"/>}
+                    title="ウルサポで「100点」へ近づく"
+                    subtitle="The Turning Point"
+                    score="95"
+                    color="#4ade80"
+                  >
+                    <div className="flex items-center space-x-3 text-sm">
+                        <TrendingUp className="w-5 h-5 text-green-400"/><span>上昇に転じる実感</span>
+                    </div>
+                    <div className="flex items-center space-x-3 text-sm">
+                        <Handshake className="w-5 h-5 text-slate-400"/><span>仲間との共創と成長</span>
+                    </div>
+                    <p className="text-xs pt-2 text-slate-400">仲間との出会い、顧客からの感謝。活動そのものが、人生の点数を高める原体験となった。</p>
+                  </StepCard>
+
+                  <DownArrow />
+
+                  {/* STEP 3 */}
+                  <StepCard 
+                    icon={<MessageSquare className="w-10 h-10 text-blue-400 bg-blue-900/50 p-2 rounded-full"/>}
+                    title="今度は、私たちが「問いかける」"
+                    subtitle="The Mission"
+                    color="#60a5fa"
+                  >
+                    <div className="flex items-center space-x-4">
+                      <div className="flex-shrink-0 text-center">
+                          <User className="w-12 h-12 text-green-400 mx-auto"/>
+                          <p className="text-xs font-bold text-white mt-1">ウルサポ</p>
+                      </div>
+                      <div className="font-bold text-2xl text-slate-500">→</div>
+                      <div className="flex-grow bg-slate-700 p-3 rounded-lg text-center">
+                          <p className="text-lg md:text-xl font-bold text-white">「いまの採用、何点ですか？」</p>
+                      </div>
+                      <div className="font-bold text-2xl text-slate-500">→</div>
+                      <div className="flex-shrink-0 text-center">
+                          <Building2 className="w-12 h-12 text-slate-400 mx-auto"/>
+                          <p className="text-xs font-bold text-white mt-1">顧客企業</p>
+                      </div>
+                    </div>
+                    <p className="text-xs pt-3 text-slate-400 text-center">自身の経験があるからこそ、本質的な問いかけで経営者の孤独に寄り添う。</p>
+                    <div className="mt-4 pt-4 border-t border-slate-700 text-center">
+                        <div className="flex items-center justify-center space-x-2">
+                            <Star className="w-6 h-6 text-amber-300" fill="#fbb_f24" />
+                            <p className="text-amber-300 font-bold text-lg md:text-xl">
+                                75点ではなく、中小企業様の120点を目指す
+                            </p>
+                            <Star className="w-6 h-6 text-amber-300" fill="#fbb_f24" />
+                        </div>
+                    </div>
+                  </StepCard>
+                  
+                  <DownArrow />
+
+                  {/* STEP 4 - Core */}
+                  <CoreIdentity />
+
+                  <DownArrow />
+                  
+                  {/* STEP 5 */}
+                  <StepCard 
+                    icon={<Trophy className="w-10 h-10 text-amber-400 bg-amber-900/50 p-2 rounded-full"/>}
+                    title="いただくのは「評価」でなく「感謝」"
+                    subtitle="The Outcome"
+                    color="#fbbf24"
+                  >
+                    <div className="flex items-center space-x-3 text-sm">
+                        <Smile className="w-5 h-5 text-amber-400"/><span>企業の変革と未来の点数UP</span>
+                    </div>
+                    <div className="flex items-center space-x-3 text-sm">
+                        <Trophy className="w-5 h-5 text-slate-400"/><span>心からの「顧客満足度賞」</span>
+                    </div>
+                    <p className="text-xs pt-2 text-slate-400">根本治療によって企業の体質は改善され、感謝の連鎖が生まれる。</p>
+                  </StepCard>
+
+                </div>
+
+                <InfographicFooter />
+              </div>
+            </div>
+          );
+        }
+
+        // Reactアプリを #root に描画
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
